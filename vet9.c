@@ -6,34 +6,46 @@ ARARA – são anagramas
 */
 
 int main(){
-    int i, j, cont;
-    char p1[4], p2[4];
+    int i, j, cont, len1, len2;
+    char p1[] = "arara", p2[] = "arara", temp;
 
-    printf("Digite uma palavra de 4 char: ");
-    scanf("%s", p1);
+    
+    len1 = strlen(p1);
+    len2 = strlen(p2);
 
-    printf("Digite outra palavra de 4 char: ");
-    scanf("%s", p2);
-
-    if(strlen(p1) == strlen(p2)){
-        for(i = 0; i <= 3; i++){
-           for(j = 0; i <= 3; j++){
-                if(p1[i] == p2[j]){
-                    cont++;
-                    p2[j] = 0;
-                    break;
-                }
-           } 
-        }
-        if(cont == strlen(p1)){
-            printf("sao anagramas");
-        } else{
-            printf("nao sao anagramas");
-        }
-
-    } else {
+    // checar se o tamanho é igual
+    if(len1 != len2){
         printf("nao sao anagramas");
+        return 0;
     }
 
+    // ordenar a string
+    for(i = 0; i<= len1 - 1; i++){
+        for(j= i+1; j < len1; j++){
+            if(p1[i] > p1[j]){
+                temp = p1[i];
+                p1[i] = p1[j];
+                p1[j] = temp;
+
+            }
+            if(p2[i] > p2[j]){
+                temp = p2[i];
+                p2[i] = p2[j];
+                p2[j] = temp;
+            }
+        }
+    }
+
+
+    // checar se as letras existem em ambas palavras
+    for(i = 0; i < len1; i++){
+        if(p1[i] != p2[i]){
+            printf("nao sao anagramas");
+            return 0;
+        }
+    }
+    printf("sao anagramas");
+    return 0;
+ 
     
 }
